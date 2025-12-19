@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Orders</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; margin:0;}
+    #login { max-width: 300px; margin: 50px auto; background: white; padding: 20px; border-radius: 8px; box-shadow:0 2px 5px rgba(0,0,0,0.2); text-align: center;}
+    #login input { width: 100%; padding: 10px; margin: 10px 0; border-radius:5px; border:1px solid #ccc; box-sizing:border-box;}
+    #login button { width: 100%; padding: 12px; border: none; border-radius:5px; background:black; color:white; cursor:pointer;}
+    #login button:hover { background:#333;}
+    #panel { display:none; margin-top:20px; }
+    table { width:100%; border-collapse: collapse; background:white; border-radius:5px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.2);}
+    th, td { padding:10px; border-bottom:1px solid #ccc; text-align:center;}
+    th { background:black; color:white; }
+    @media(max-width:600px){
+      table, thead, tbody, th, td, tr { display:block; }
+      th { text-align:right; }
+      td { text-align:right; padding-left:50%; position:relative; }
+      td::before { position:absolute; left:10px; width:45%; white-space:nowrap; font-weight:bold; content: attr(data-label); text-align:left;}
+    }
+  </style>
+</head>
+<body>
+
+<div id="login">
+  <h3>🔐 Admin Login</h3>
+  <input type="password" id="pass" placeholder="Enter password">
+  <button onclick="login()">Login</button>
+  <p id="error" style="color:red;"></p>
+</div>
+
+<div id="panel">
+  <h2>📦 Orders Dashboard</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Product</th>
+        <th>Size</th>
+        <th>Pincode</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody id="orders"></tbody>
+  </table>
+</div>
+
+<script>
+const ADMIN_PASSWORD = "admin123"; // CHANGE THIS PASSWORD
+
+function login() {
+  let p = document.getElementById("pass").value;
+  if(p === ADMIN_PASSWORD){
+    document.getElementById("login").style.display="none";
+    document.getElementById("panel").style.display="block";
+    loadOrders();
+  } else {
+    document.getElementById("error").innerText="Wrong password";
+  }
+}
+
+function loadOrders() {
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+  let table = document.getElementById("orders");
+  table.innerHTML = "";
+  orders.forEach(o => {
+    let row = `<tr>
+      <td data-label="Name">${o.name}</td>
+      <td data-label="Phone">${o.phone}</td>
+      <td data-label="Product">${o.product}</td>
+      <td data-label="Size">${o.size}</td>
+      <td data-label="Pincode">${o.pincode}</td>
+      <td data-label="Total">₹${o.total}</td>
+    </tr>`;
+    table.innerHTML += row;
+  });
+}
+</script>
+
+</body>
+</html>

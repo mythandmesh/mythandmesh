@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Clothing Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>My Clothing Store</h1>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#order">Order</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="home" class="hero">
+  <h2>Simple. Stylish. Affordable.</h2>
+  <p>Order easily with Cash on Delivery</p>
+</section>
+
+<section id="shop" class="products">
+  <div class="product">
+    <img src="images/tshirt.jpg" alt="T-Shirt">
+    <h3>T-Shirt</h3>
+    <p>₹499</p>
+  </div>
+  <div class="product">
+    <img src="images/hoodie.jpg" alt="Hoodie">
+    <h3>Hoodie</h3>
+    <p>₹999</p>
+  </div>
+  <div class="product">
+    <img src="images/jeans.jpg" alt="Jeans">
+    <h3>Jeans</h3>
+    <p>₹1299</p>
+  </div>
+</section>
+
+<!-- COD ORDER FORM -->
+<section id="order" class="order">
+  <h2>Cash on Delivery Order</h2>
+
+  <form action="https://formsubmit.co/your@email.com" method="POST" onsubmit="sendWhatsApp()">
+    
+    <input type="text" id="name" name="Name" placeholder="Your Name" required>
+    <input type="text" id="phone" name="Phone" placeholder="Phone Number" required>
+    
+    <select id="product" name="Product" required>
+      <option value="">Select Product</option>
+      <option value="T-Shirt - ₹499">T-Shirt - ₹499</option>
+      <option value="Hoodie - ₹999">Hoodie - ₹999</option>
+      <option value="Jeans - ₹1299">Jeans - ₹1299</option>
+    </select>
+
+    <select id="size" name="Size" required>
+      <option value="">Select Size</option>
+      <option value="S">Small (S)</option>
+      <option value="M">Medium (M)</option>
+      <option value="L">Large (L)</option>
+      <option value="XL">Extra Large (XL)</option>
+    </select>
+
+    <input type="number" id="pincode" name="Pincode" placeholder="Pin Code" onkeyup="calculateTotal()" required>
+
+    <input type="text" id="coupon" placeholder="Coupon Code">
+    <button type="button" onclick="applyCoupon()">Apply Coupon</button>
+    <p id="discountMsg"></p>
+
+    <textarea id="address" name="Address" placeholder="Full Address" required></textarea>
+
+    <p><strong>Total Amount: ₹<span id="total">0</span></strong></p>
+    <input type="hidden" id="finalAmount" name="Total Amount">
+
+    <input type="hidden" name="_next" value="success.html">
+    <input type="hidden" name="_subject" value="New COD Order">
+    <input type="hidden" name="_captcha" value="false">
+
+    <button type="submit">Place Order</button>
+  </form>
+</section>
+
+<section id="contact" class="contact">
+  <h2>Contact Us</h2>
+  <p>📧 myclothing@gmail.com</p>
+  <p>📞 +91 90000 00000</p>
+
+  <!-- Instagram -->
+  <a class="insta" href="https://instagram.com/yourpage" target="_blank">📸 Follow us on Instagram</a>
+</section>
+
+<footer>
+  <p>© 2025 My Clothing Store</p>
+</footer>
+
+<!-- SCRIPT SECTION -->
+<script>
+let discount = 0;
+
+function calculateTotal() {
+  let product = document.getElementById("product").value;
+  let pincode = document.getElementById("pincode").value;
+
+  let price = 0;
+  if (product.includes("499")) price = 499;
+  if (product.includes("999")) price = 999;
+  if (product.includes("1299")) price = 1299;
+
+  let delivery = 0;
+  if (pincode >= 400001 && pincode <= 400099) {
+    delivery = 50;
+  } else if (pincode.length === 6) {
+    delivery = 100;
+  }
+
+  let total = price + delivery - discount;
+  if (total < 0) total = 0;
+
+  document.getElementById("total").innerText = total;
+  document.getElementById("finalAmount").value = "₹" + total;
+}
+
+function applyCoupon() {
+  let code = document.getElementById("coupon").value;
+  if (code === "SAVE50") {
+    discount = 50;
+    document.getElementById("discountMsg").innerText = "Coupon applied! ₹50 OFF";
+  } else {
+    discount = 0;
+    document.getElementById("discountMsg").innerText = "Invalid coupon";
+  }
+  calculateTotal();
+}
+
+function sendWhatsApp() {
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let product = document.getElementById("product").value;
+  let size = document.getElementById("size").value;
+  let pincode = document.getElementById("pincode").value;
+  let address = document.getElementById("address").value;
+  let total = document.getElementById("total").innerText;
+
+  // Save order in localStorage for admin page
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+  orders.push({ name, phone, product, size, pincode, total });
+  localStorage.setItem("orders", JSON.stringify(orders));
+
+  // WhatsApp message
+  let msg =
+    "New COD Order%0A" +
+    "Name: " + name + "%0A" +
+    "Phone: " + phone + "%0A" +
+    "Product: " + product + "%0A" +
+    "Size: " + size + "%0A" +
+    "Pincode: " + pincode + "%0A" +
+    "Total: ₹" + total;
+
+  window.open(
+    "https://wa.me/919000000000?text=" + msg,
+    "_blank"
+  );
+}
+</script>
