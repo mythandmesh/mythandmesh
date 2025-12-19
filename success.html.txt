@@ -1,50 +1,178 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Order Placed</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .box {
-      background: white;
-      padding: 30px;
-      text-align: center;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      max-width: 400px;
-      width: 90%;
-    }
-    .box h2 {
-      color: green;
-      margin-bottom: 15px;
-    }
-    .box a {
-      display: inline-block;
-      margin-top: 20px;
-      text-decoration: none;
-      background: black;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-    }
-    .box a:hover {
-      background: #333;
-    }
-  </style>
-</head>
-<body>
-  <div class="box">
-    <h2>✅ Order Placed Successfully!</h2>
-    <p>Thank you for your order. We will contact you shortly.</p>
-    <a href="index.html">Back to Home</a>
-  </div>
-</body>
-</html>
+:root {
+  --bg: #000;
+  --fg: #fff;
+  --muted: #aaa;
+  --accent: #ff2d2d;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.5;
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.logo {
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.nav a {
+  margin-left: 30px;
+  text-decoration: none;
+  color: var(--fg);
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.nav a:hover {
+  opacity: 1;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 60px;
+  background: radial-gradient(circle at top, #111, #000);
+}
+
+.hero-content {
+  max-width: 600px;
+  animation: fadeUp 1s ease forwards;
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  color: var(--muted);
+  margin-bottom: 30px;
+}
+
+.cta {
+  display: inline-block;
+  padding: 14px 36px;
+  border-radius: 40px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.3s ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+}
+
+/* PRODUCTS */
+.products {
+  padding: 120px 60px;
+}
+
+.products h2 {
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+}
+
+.product {
+  background: #111;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.4s ease;
+}
+
+.product:hover {
+  transform: translateY(-10px);
+}
+
+.product img {
+  width: 100%;
+  display: block;
+}
+
+.info {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ABOUT */
+.about {
+  padding: 100px 60px;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.about p {
+  max-width: 600px;
+  margin: auto;
+  color: var(--muted);
+}
+
+/* FOOTER */
+footer {
+  padding: 40px;
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .nav {
+    padding: 20px;
+  }
+  .hero {
+    padding: 0 20px;
+  }
+  .products, .about {
+    padding: 80px 20px;
+  }
+}

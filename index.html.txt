@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Myth & Mesh — Streetwear</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="logo">MYTH & MESH</div>
+    <nav>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Engineered<br>for the Streets</h1>
+      <p>Minimal. Bold. Built for everyday wear.</p>
+      <a href="#shop" class="cta">Shop Collection</a>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="shop" class="products">
+    <h2>Featured Drops</h2>
+
+    <div class="product-grid">
+      <div class="product">
+        <img src="assets/fluent.jpg" alt="Fluent Tee">
+        <div class="info">
+          <span>Fluent Tee</span>
+          <strong>₹999</strong>
+        </div>
+      </div>
+
+      <div class="product">
+        <img src="assets/red-skeli.jpg" alt="Red Skeli Tee">
+        <div class="info">
+          <span>Red Skeli Tee</span>
+          <strong>₹1,199</strong>
+        </div>
+      </div>
+
+      <div class="product">
+        <img src="assets/simplicity.jpg" alt="Simplicity Tee">
+        <div class="info">
+          <span>Simplicity Tee</span>
+          <strong>₹899</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <h2>Why Myth & Mesh?</h2>
+    <p>
+      Inspired by modern street culture and engineered for comfort.
+      No noise. No clutter. Just clean silhouettes.
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <p>© 2025 Myth & Mesh</p>
+    <p>Designed for the fearless.</p>
+  </footer>
+
+</body>
+</html>
